@@ -1,0 +1,11 @@
+environment:
+  - env: GOOD_REACTBANK_LANDING_PAGE_URL
+    val: "https://demo1.testgold.dev"
+  - env: BAD_REACTBANK_LANDING_PAGE_URL
+    val: "https://demo2.testgold.dev"
+  - env: REACTBANK_COMPLAINT_FULLNAME
+    val: "Node Environment Jones"
+  - env: REACTBANK_COMPLAINT_EMAIL
+    val: "nodeenvjones@example.com"
+  - env: REACTBANK_COMPLAINT_MESSAGE
+    val: "This bank stole all my money!"
