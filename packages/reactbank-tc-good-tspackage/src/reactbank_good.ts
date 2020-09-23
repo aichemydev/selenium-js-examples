@@ -4,6 +4,10 @@ import chrome from 'selenium-webdriver/chrome';
 // dependency NOT in package.json but as separate JS package file
 import * as winston from 'winston';
 
+// importing JSON
+import * as loginPageInfo from '../login-page-xpaths.json';
+console.log(loginPageInfo);
+
 ////////////
 // logger //
 ////////////
