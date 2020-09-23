@@ -54,15 +54,14 @@ describe('Selenium React Bank Test', function() {
 
   });
 
-       // actual test
-    it('should log out', async function() {
- 
-      console.log("[RUNNER] doing logout");
-      await logoutFromReactBank(driver, timeOutSec);
-      await driver.close();
-      return await driver.quit();
- 
-    });
+  // actual test
+  it('should log out', async function() {
 
+    console.log("[RUNNER] doing logout");
+    await logoutFromReactBank(driver, timeOutSec);
+    await driver.close();
+    return await driver.quit();
+
+  });
 
 });
