@@ -1,6 +1,0 @@
-{
-  "environment": [
-    {"env": "REACTBANK_USERNAME", "val": "email@example.com"},
-    {"env": "REACTBANK_PASSWORD", "val": "admin123"}
-  ]
-}
