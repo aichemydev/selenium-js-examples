@@ -104,7 +104,6 @@ async function loginToReactBank(driver, timeoutSec) {
   // fill in the email addr and password
   logger.info("[TEST] finding login email box and filling it in");
   let emailBox = await driver.findElement(By.xpath(loginEmailXPath));
-  logger.info("[TEST] Email is:" + loginEmailAddr);
   await emailBox.sendKeys(loginEmailAddr);
   logger.info("[TEST] finding login password box and filling it in");
   let passBox = await driver.findElement(By.xpath(loginPasswordXPath));
