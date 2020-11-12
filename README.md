@@ -2,7 +2,9 @@
 
 To run the examples:
 
-1. The dependencies are in the folder "test-dependencies"
-2. Packages are in the folder "packages"
-
-If using the testgold UI, you need to add dependencies by adding every file under test-dependencies. You can add a package from any of the examples under packages, remember to add the .tar.gz as the package. login-page-xpaths.yaml should be set as a data file for the tests.
+1. Go to the javascript folder
+2. Go to nocode.testgold.dev (get the token after you are activated).
+3. Execute the shell command to export TESTGOLD_AIO_TOKEN=<string_you_get_from_website>
+4. npm install selenium-webdriver-20.11.0.tgz (download link will be given from the site)
+5. node reactbank-test-old.js (to train the testgold sensor on the page)
+6. node reactbank-test-new.js (to apply healing on a broken test script), you can view this on the UI link too
