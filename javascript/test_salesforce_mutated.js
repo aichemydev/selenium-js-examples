@@ -25,7 +25,7 @@ const userNmTxtBx = "//input[@class='input r4 wide mb16 mt8 username']";
 const passwdTxtBx = "//input[@class='input r4 wide mb16 mt8 password']";
 
 const Userid = "dharam@testgold.dev";
-const Password = "Autom8er";
+const Password = "admin123";
 
 const loginBtn = "//input[@class='button r4 wide primary']";
 const contactsButPath = "//span[.='Contacts']";

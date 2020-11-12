@@ -223,18 +223,6 @@ async function fillOutHelpForm(driver, timeoutSec) {
 
   try {
 
-    // get WAL_SERVER_AUTHTOKEN and WAL_SERVER_HOST
-    let walServerAuthToken = process.env.WAL_SERVER_AUTHTOKEN;
-    if (walServerAuthToken === undefined) {
-      console.error("[RUNNER] need WAL_SERVER_AUTHTOKEN in environment");
-      process.exit(1);
-    }
-    let walServerHost = process.env.WAL_SERVER_HOST;
-    if (walServerHost === undefined) {
-      console.error("[RUNNER] need WAL_SERVER_HOST in environment");
-      process.exit(1);
-    }
-
     let options = new chrome.Options();
     options.addArguments("--headless");
     options.addArguments("--disable-extensions");

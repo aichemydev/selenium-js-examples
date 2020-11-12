@@ -48,8 +48,8 @@ const minionMessage = "//h3[.='Your Avatar: Minions']";
 const ballMessage = "//h3[.='Your Avatar: Color Ball']";
 const astroMessage = "//h3[.='Your Avatar: Spaceman']";
 const geoLocation = "//button[.='Where am I?']";
-const geoLocLatitude = "//p[@id='demo' and contains(text(),'Latitude')] /div[1][@id='lat-value']";
-const geoLocLongitude = "//p[@id='demo' and contains(text(),'Latitude')] /div[2][@id='long-value']";
+const geoLocLatitude = "//p[@id='demo' and contains(text(),'Latitude')]/span[@id='lat-value']";
+const geoLocLongitude = "//p[@id='demo' and contains(text(),'Longitude')]/span[@id='long-value']";
 const dynamicRemove = "//button[.='Remove']";
 const removableChkBox = "//input[@type='checkbox'][@label='blah']";
 const itsbsck = "//p[.='It\\'s back!']";
@@ -323,7 +323,7 @@ async function validateElementsInBenchmarkPage(driver, timeoutSec) {
     } catch (err) {
         console.log(err);
         exitCode = 1;
-    
+
     } finally {
 
         console.log('[RUNNER] waiting to close the window');
@@ -332,9 +332,9 @@ async function validateElementsInBenchmarkPage(driver, timeoutSec) {
         console.log('[RUNNER] window close done. Waiting for driver quit');
         await driver.quit();
         console.log('[RUNNER] driver quit done');
-    
+
     }
-    
+
     console.log(`[RUNNER] test run complete. exit code: ${exitCode}`);
     process.exit(exitCode);
 })(2.0);

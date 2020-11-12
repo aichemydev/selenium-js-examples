@@ -1,14 +1,23 @@
-import { WebDriver, By } from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome';
+const webdriver = require('selenium-webdriver'),
+      By = webdriver.By,
+      until = webdriver.until;
+const chrome = require('selenium-webdriver/chrome');
+
+
+///////////////////////
+// utility functions //
+///////////////////////
+
+async function awaitableTimeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 ////////////////////
 // test constants //
 ////////////////////
 
-export const editor = process.env.EDITOR;
-
-export const landingPageUrl = "https://demo1.testgold.dev";
+const landingPageUrl = "https://demo1.testgold.dev";
 const landingLoginButtonXPath = "//a[@class='btn btn-primary btn-lg' and " +
       "contains(text(),'Click here to log in')]";
 
@@ -46,21 +55,12 @@ const helpFormItems = {
 };
 
 
-///////////////////////
-// utility functions //
-///////////////////////
-
-export async function awaitableTimeout(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
 ////////////////////
 // test functions //
 ////////////////////
 
 // this logs into the ReactBank website and returns the driver in the new state
-export async function loginToReactBank(driver: WebDriver, timeoutSec: number) {
+async function loginToReactBank(driver, timeoutSec) {
 
   await awaitableTimeout(timeoutSec*1000);
 
@@ -98,7 +98,7 @@ export async function loginToReactBank(driver: WebDriver, timeoutSec: number) {
 
 // this logs out from the ReactBank website and returns the driver in the new
 // state
-export async function logoutFromReactBank(driver: WebDriver, timeoutSec: number) {
+async function logoutFromReactBank(driver, timeoutSec) {
 
   await awaitableTimeout(timeoutSec*1000);
 
@@ -116,7 +116,7 @@ export async function logoutFromReactBank(driver: WebDriver, timeoutSec: number)
 
 // tries to find and click on the balance item on the user page and get the
 // text of the balance item
-export async function findBalanceOnUserPage(driver: WebDriver, timeoutSec: number) {
+async function findBalanceOnUserPage(driver, timeoutSec) {
 
   await awaitableTimeout(timeoutSec*1000);
 
@@ -140,7 +140,7 @@ export async function findBalanceOnUserPage(driver: WebDriver, timeoutSec: numbe
 }
 
 // this tries to find the help page, then fill in the help form, then submit it
-export async function fillOutHelpForm(driver: WebDriver, timeoutSec: number) {
+async function fillOutHelpForm(driver, timeoutSec) {
 
   await awaitableTimeout(timeoutSec*1000);
 
@@ -210,3 +210,78 @@ export async function fillOutHelpForm(driver: WebDriver, timeoutSec: number) {
   return driver;
 
 }
+
+
+/////////////////
+// test runner //
+/////////////////
+
+(async function main(timeoutSec) {
+
+  let exitCode = 0;
+  let driver;
+
+  try {
+
+    // get WAL_SERVER_AUTHTOKEN and WAL_SERVER_HOST
+
+    let options = new chrome.Options();
+    options.addArguments("--headless");
+    options.addArguments("--disable-extensions");
+    // options.addArguments("remote-debugging-port=9222");
+    driver = await new webdriver.Builder()
+	  .forBrowser('chrome')
+	  .setChromeOptions(options)
+	  .build();
+
+    // get to the landing page
+    await driver.get(landingPageUrl);
+
+    //
+    // login
+    //
+    console.log("[RUNNER] doing login");
+    await loginToReactBank(driver, timeoutSec);
+    console.log("[RUNNER] login done");
+
+    //
+    // other tests go here
+    //
+
+    // balance check
+    console.log("[RUNNER] doing balance check");
+    await findBalanceOnUserPage(driver, timeoutSec);
+    console.log("[RUNNER] balance check done");
+
+    // help form fill-in
+    console.log("[RUNNER] doing help form");
+    await fillOutHelpForm(driver, timeoutSec);
+    console.log("[RUNNER] help form done");
+
+    //
+    // logout
+    //
+    console.log("[RUNNER] doing logout");
+    await logoutFromReactBank(driver, timeoutSec);
+    console.log("[RUNNER] logout done");
+
+  } catch (err) {
+
+    console.log(err);
+    exitCode = 1;
+
+  } finally {
+
+    console.log('[RUNNER] waiting to close the window');
+    await awaitableTimeout(2500);
+    await driver.close();
+    console.log('[RUNNER] window close done. Waiting for driver quit');
+    await driver.quit();
+    console.log('[RUNNER] driver quit done');
+
+  }
+
+  console.log(`[RUNNER] test run complete. exit code: ${exitCode}`);
+  process.exit(exitCode);
+
+})(2.0);

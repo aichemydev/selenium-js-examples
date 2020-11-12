@@ -1,6 +1,0 @@
-loginPageXPaths:
-  landingLoginButtonXPath: "//a[@class='btn btn-primary btn-lg' and contains(text(),'Click here to log in')]"
-  loginEmailXPath: "//input[@name='email']"
-  loginPasswordXPath: "//input[@name='password']"
-  loginSubmitXPath: "//button[@class='btn btn-primary' and contains(text(),'Log in now')]"
-  logoutLinkXPath: "//a[@href='/logout' and contains(text(),'Logout')]"
