@@ -159,7 +159,7 @@ async function login_to_salesforce(driver, timeoutSec) {
 
     try {
         let options = new chrome.Options();
-        options.addArguments("--headless");
+	//options.addArguments("--headless");
         options.addArguments("--disable-extensions");
 
         driver = await new webdriver.Builder()
